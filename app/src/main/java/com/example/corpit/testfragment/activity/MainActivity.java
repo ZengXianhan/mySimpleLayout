@@ -3,12 +3,14 @@ package com.example.corpit.testfragment.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.corpit.testfragment.R;
@@ -22,6 +24,11 @@ public class MainActivity extends FragmentActivity {
     private LinearLayout mToSecondPage;
     private LinearLayout mToThirdPage;
     private LinearLayout mToFourthPage;
+
+    private ImageView imageMainPage;
+    private ImageView imageSecondPage;
+    private ImageView imageThirdPage;
+    private ImageView imageFourthPage;
 
     private Fragment mMainPageFragment;
     private Fragment mSecondPageFragment;
@@ -43,6 +50,11 @@ public class MainActivity extends FragmentActivity {
         mToSecondPage = (LinearLayout) findViewById(R.id.id_ll_tab_two_page);
         mToThirdPage = (LinearLayout) findViewById(R.id.id_ll_tab_third_page);
         mToFourthPage = (LinearLayout) findViewById(R.id.id_ll_tab_fourth_page);
+
+        imageMainPage = (ImageView) findViewById(R.id.id_tab_main_page);
+        imageSecondPage = (ImageView) findViewById(R.id.id_tab_second_page);
+        imageThirdPage = (ImageView) findViewById(R.id.id_tab_third_page);
+        imageFourthPage = (ImageView) findViewById(R.id.id_tab_fourth_page);
     }
 
     private void initData() {
@@ -58,45 +70,83 @@ public class MainActivity extends FragmentActivity {
         mToSecondPage.setOnClickListener(new MyOnClickListener());
         mToThirdPage.setOnClickListener(new MyOnClickListener());
         mToFourthPage.setOnClickListener(new MyOnClickListener());
-        mFragmentFrameLayout.setOnScrollChangeListener();
     }
 
     class MyOnClickListener implements OnClickListener {
 
         @Override
         public void onClick(View v) {
-            FragmentManager fm = getFragmentManager();
-            // 开启Fragment事务
-            FragmentTransaction transaction = fm.beginTransaction();
-
+            int colorPressed = R.color.colorTitle;
             switch (v.getId()) {
                 case R.id.id_ll_tab_main_page:
-                    if (mMainPageFragment == null) {
-                        mMainPageFragment = new MainPageFragment();
-                    }
-                    // 使用当前Fragment的布局替代id_content的控件
-                    transaction.replace(R.id.fragment_frame_layout, mMainPageFragment);
+                    goToMainPageFragment();
+                    resetBtnColorStatus();
+                    imageMainPage.setBackgroundResource(colorPressed);
                     break;
                 case R.id.id_ll_tab_two_page:
-                    if (mSecondPageFragment == null) {
-                        mSecondPageFragment = new SecondPageFragment();
-                    }
-                    transaction.replace(R.id.fragment_frame_layout, mSecondPageFragment);
+                    goToSecondPageFragment();
+                    resetBtnColorStatus();
+                    imageSecondPage.setBackgroundResource(colorPressed);
                     break;
                 case R.id.id_ll_tab_third_page:
-                    if (mThirdPageFragment == null) {
-                        mThirdPageFragment = new ThirdPageFragment();
-                    }
-                    transaction.replace(R.id.fragment_frame_layout, mThirdPageFragment);
+                    goToThirdPageFragment();
+                    resetBtnColorStatus();
+                    imageThirdPage.setBackgroundResource(colorPressed);
                     break;
                 case R.id.id_ll_tab_fourth_page:
-                    if (mFourthPageFragment == null) {
-                        mFourthPageFragment = new FourPageFragment();
-                    }
-                    transaction.replace(R.id.fragment_frame_layout, mFourthPageFragment);
+                    goToFourthPageFragment();
+                    resetBtnColorStatus();
+                    imageFourthPage.setBackgroundResource(colorPressed);
                     break;
             }
-            transaction.commit();
         }
+    }
+
+    private void goToMainPageFragment(){
+        FragmentManager fm = getFragmentManager();        // 开启Fragment事务
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (mMainPageFragment == null) {
+            mMainPageFragment = new MainPageFragment();
+        }
+        transaction.replace(R.id.fragment_frame_layout, mMainPageFragment);// 使用当前Fragment的布局替代id_content的控件
+        transaction.commit();
+    }
+
+    private void goToSecondPageFragment(){
+        FragmentManager fm = getFragmentManager();        // 开启Fragment事务
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (mSecondPageFragment == null) {
+            mSecondPageFragment = new SecondPageFragment();
+        }
+        transaction.replace(R.id.fragment_frame_layout, mSecondPageFragment);// 使用当前Fragment的布局替代id_content的控件
+        transaction.commit();
+    }
+
+    private void goToThirdPageFragment(){
+        FragmentManager fm = getFragmentManager();        // 开启Fragment事务
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (mThirdPageFragment == null) {
+            mThirdPageFragment = new ThirdPageFragment();
+        }
+        transaction.replace(R.id.fragment_frame_layout, mThirdPageFragment);// 使用当前Fragment的布局替代id_content的控件
+        transaction.commit();
+    }
+
+    private void goToFourthPageFragment(){
+        FragmentManager fm = getFragmentManager();        // 开启Fragment事务
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (mFourthPageFragment == null) {
+            mFourthPageFragment = new FourPageFragment();
+        }
+        transaction.replace(R.id.fragment_frame_layout, mFourthPageFragment);// 使用当前Fragment的布局替代id_content的控件
+        transaction.commit();
+    }
+
+    private void resetBtnColorStatus(){
+        int colorReset = R.color.colorNoColor;
+        imageMainPage.setBackgroundResource(colorReset);
+        imageSecondPage.setBackgroundResource(colorReset);
+        imageThirdPage.setBackgroundResource(colorReset);
+        imageFourthPage.setBackgroundResource(colorReset);
     }
 }
