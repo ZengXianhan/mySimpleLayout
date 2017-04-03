@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TestFragment</string>
+    <string name="page_one">Page One</string>
+    <string name="page_two">Page Two</string>
+    <string name="page_three">Page Three</string>
+    <string name="page_four">Page Four</string>
 </resources>

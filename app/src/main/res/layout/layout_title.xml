@@ -15,8 +15,7 @@
         android:text="标题栏"
         android:textColor="#ffffffff"
         android:textSize="20dp"
-        android:layout_toLeftOf="@id/button_forward"
-        android:layout_toRightOf="@id/button_backward"/>
+        />
 
     <Button
         android:id="@+id/button_backward"

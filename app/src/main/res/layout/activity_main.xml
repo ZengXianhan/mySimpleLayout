@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.corpit.testfragment.MainActivity">
+    tools:context="com.example.corpit.testfragment.activity.MainActivity">
 
     <include layout="@layout/layout_title"
         android:id="@+id/title"/>
     <include layout="@layout/layout_footer"
-        android:id="@+id/footer"/>
+        android:id="@+id/footer" />
 
     <FrameLayout
+        android:id="@+id/fragment_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title"
         android:layout_above="@+id/footer">
-
     </FrameLayout>
 
 </RelativeLayout>
