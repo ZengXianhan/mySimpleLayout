@@ -9,6 +9,7 @@ import com.example.corpit.testfragment.fragment.MainPageFragment;
 import com.example.corpit.testfragment.fragment.SecondPageFragment;
 import com.example.corpit.testfragment.fragment.ThirdPageFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,28 +17,24 @@ import java.util.List;
  */
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
+    private List<Fragment> fragments = new ArrayList<>();
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
+        fragments.add(new MainPageFragment());
+        fragments.add(new SecondPageFragment());
+        fragments.add(new ThirdPageFragment());
+        fragments.add(new FourPageFragment());
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new MainPageFragment();
-            case 1:
-                return new SecondPageFragment();
-            case 2:
-                return new ThirdPageFragment();
-            case 3:
-                return new FourPageFragment();
-        }
-        throw new IllegalStateException("No Fragment in position " + position);
+        return fragments.get(position);
     }
+
 
     @Override
     public int getCount() {
-        return 4;
+        return fragments.size();
     }
 }

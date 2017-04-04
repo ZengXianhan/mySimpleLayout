@@ -10,19 +10,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.corpit.testfragment.R;
 import com.example.corpit.testfragment.adapter.MainViewPagerAdapter;
-import com.example.corpit.testfragment.fragment.FourPageFragment;
-import com.example.corpit.testfragment.fragment.MainPageFragment;
-import com.example.corpit.testfragment.fragment.SecondPageFragment;
-import com.example.corpit.testfragment.fragment.ThirdPageFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends FragmentActivity {
     private LinearLayout mToMainPage;
@@ -35,15 +27,8 @@ public class MainActivity extends FragmentActivity {
     private ImageView imageThirdPage;
     private ImageView imageFourthPage;
 
-    private Fragment mMainPageFragment;
-    private Fragment mSecondPageFragment;
-    private Fragment mThirdPageFragment;
-    private Fragment mFourthPageFragment;
-    private FrameLayout mFragmentFrameLayout;
-
     private ViewPager viewPager;
     private MainViewPagerAdapter adapter;
-    private ArrayList<Fragment> fragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +39,7 @@ public class MainActivity extends FragmentActivity {
         initEvent();
     }
 
+    //初始化所有控件
     private void initView() {
         mToMainPage = (LinearLayout) findViewById(R.id.id_ll_tab_main_page);
         mToSecondPage = (LinearLayout) findViewById(R.id.id_ll_tab_two_page);
@@ -66,24 +52,27 @@ public class MainActivity extends FragmentActivity {
         imageFourthPage = (ImageView) findViewById(R.id.id_tab_fourth_page);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_container);
-
     }
 
+    //初始化数据
     private void initData() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        adapter = new MainViewPagerAdapter(fragmentManager);
+        adapter = new MainViewPagerAdapter(fragmentManager);  //定义新FragmentPagerAdapter
         viewPager.setAdapter(adapter);
 
-        int colorPressed = R.color.colorTitle;
+        int colorPressed = R.color.colorTitle;  //下方Tag按钮的显示颜色
         imageMainPage.setBackgroundResource(colorPressed);
     }
 
+    //初始化控件事件
     private void initEvent() {
+        //下方Tag按钮点击事件
         mToMainPage.setOnClickListener(new MyOnClickListener());
         mToSecondPage.setOnClickListener(new MyOnClickListener());
         mToThirdPage.setOnClickListener(new MyOnClickListener());
         mToFourthPage.setOnClickListener(new MyOnClickListener());
 
+        //viewPager的滑动事件，左右滑动可切换不同Fragment
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -120,6 +109,7 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
+    //自定义按钮监听方法
     class MyOnClickListener implements OnClickListener {
 
         @Override
@@ -150,18 +140,16 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    //Fragment切换方法
     private void goToMainPageFragment() {
         viewPager.setCurrentItem(0);
     }
-
     private void goToSecondPageFragment() {
         viewPager.setCurrentItem(1);
     }
-
     private void goToThirdPageFragment() {
         viewPager.setCurrentItem(2);
     }
-
     private void goToFourthPageFragment() {
 //        FragmentManager fm = getSupportFragmentManager();        // 开启Fragment事务
 //        FragmentTransaction transaction = fm.beginTransaction();
@@ -173,6 +161,7 @@ public class MainActivity extends FragmentActivity {
         viewPager.setCurrentItem(3);
     }
 
+    //重置所有的按钮颜色
     private void resetBtnColorStatus() {
         int colorReset = R.color.colorNoColor;
         imageMainPage.setBackgroundResource(colorReset);
