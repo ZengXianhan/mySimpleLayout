@@ -4,4 +4,14 @@
     <string name="page_two">Page Two</string>
     <string name="page_three">Page Three</string>
     <string name="page_four">Page Four</string>
+
+    <string name="hello_world_cn">你好，世界</string>
+    <string name="hello_world_en">Hello, world</string>
+    <string name="hello_world_br">Hello, world</string>
+    <string name="hello_world_it">Ciao mondo</string>
+    <string name="hello_world_fr">Bonjour le monde</string>
+    <string name="hello_world_jp">こんにちは世界</string>
+    <string name="hello_world_kr">안녕 세상</string>
+    <string name="hello_world_ru">Привет мир</string>
+
 </resources>

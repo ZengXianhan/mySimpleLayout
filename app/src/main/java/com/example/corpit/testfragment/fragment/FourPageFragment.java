@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.corpit.testfragment.R;
 import com.example.corpit.testfragment.adapter.SpinnerAdapter;
@@ -22,6 +24,7 @@ import java.util.List;
 public class FourPageFragment extends Fragment {
     Spinner spinner;
     List<Country> data;
+    TextView helloWorld;
 
     @Nullable
     @Override
@@ -34,6 +37,7 @@ public class FourPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initView();
         initData();
+        initEvent();
     }
 
     @Override
@@ -49,11 +53,29 @@ public class FourPageFragment extends Fragment {
     private void initView(){
         View parent =getView();
         spinner = (Spinner)parent.findViewById(R.id.spinner);
+        helloWorld = (TextView) parent.findViewById(R.id.tv_helloWorld);
     }
 
     private void initData(){
         data = CountryData.getCountryList();
         SpinnerAdapter adapter = new SpinnerAdapter(getContext(),data);
         spinner.setAdapter(adapter);
+        String sayHello = getResources().getString(data.get(0).helloWorld);
+        helloWorld.setText(sayHello);
+    }
+
+    private void initEvent(){
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sayHello = getResources().getString(data.get(position).helloWorld);
+                helloWorld.setText(sayHello);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
