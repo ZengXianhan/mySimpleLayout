@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:text="TextView"
-        android:textSize="30sp" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"/>
 
     <ImageView
         android:id="@+id/iv_countryflag"
